@@ -1,6 +1,6 @@
 //Template is created by Zhuoli Xiao, on Sept. 19st, 2016.
-//Only used for Lab 226, 2016 Fall. 
-//All Rights Reserved. 
+//Only used for Lab 226, 2016 Fall.
+//All Rights Reserved.
 
 //modified by Rich Little on Sept. 23, 2016
 //modified by Rich Little on May 12, 2017
@@ -15,30 +15,29 @@ public class QuickSelect {
             return S[0];
 
         return quickSelect(0,S.length-1,S,k);
-
     }
 
-    //do quickSelect in a recursive way 
+    //do quickSelect in a recursive way
     private static int quickSelect(int left,int right, int[] array, int k){
-        //TODO if there is only one element now, just record.
         if (left == right) {
             return array[left];
         }
-        //TODO pick a random pivot
+        //Pick a random pivot
         int pIndex = pickRandomPivot(left, right);
-        //TODO do the partition based on the pivot
-        pIndex = partition(left, right, array, pIndex);
-        //TODO recursive call for quickSelect
-        if (k == pIndex) {
-            return array[pIndex];
-        } else if (k < pIndex) {
-            return quickSelect(ar)
+        //Partition based on the pivot
+        int partition = partition(left, right, array, pIndex);
+        //Return value at k if the partition value is equal to the kth position
+        if (partition == k - 1) {
+            return array[partition];
+        //Search right side of array if partition value is less than the kth position.
+        } else if (partition < k - 1) {
+            return quickSelect(partition + 1, right, array, k);
+        // Search left side of array if partition value is greater than the kth position
+        } else {
+            return quickSelect(left, partition - 1, array, k);
         }
-
-        return 0;
-
     }
-    //TODO do Partition with a pivot
+
     private static int partition(int left, int right, int[] array, int pIndex){
         int value = array[pIndex];
         swap(array, pIndex, right);
@@ -92,4 +91,3 @@ public class QuickSelect {
         System.out.println("Correct answer is 2 = " + "Your answer: "+QS(array5,5));
     }
 }
-
